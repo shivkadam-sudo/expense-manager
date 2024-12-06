@@ -1,0 +1,66 @@
+index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .expense-list {
+      margin-top: 20px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Expense Manager</h1>
+  <div class="container">
+    <input type="text" id="expense-name" placeholder="Expense Name">
+    <input type="number" id="expense-amount" placeholder="Expense Amount">
+    <button onclick="addExpense()">Add Expense</button>
+
+    <div class="expense-list">
+      <h2>Total Expenses: $<span id="total-expenses">0</span></h2>
+      <ul id="expense-items"></ul>
+    </div>
+  </div>
+
+  <script>
+    let totalExpenses = 0;
+
+    function addExpense() {
+      const name = document.getElementById('expense-name').value;
+      const amount = parseFloat(document.getElementById('expense-amount').value);
+
+      if (name && !isNaN(amount)) {
+        totalExpenses += amount;
+        document.getElementById('total-expenses').textContent = totalExpenses.toFixed(2);
+        
+        const listItem = document.createElement('li');
+        listItem.textContent = ${name}: $${amount.toFixed(2)};
+        document.getElementById('expense-items').appendChild(listItem);
+
+        document.getElementById('expense-name').value = '';
+        document.getElementById('expense-amount').value = '';
+      }
+    }
+  </script>
+</body>
+</html>
